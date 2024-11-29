@@ -2,3 +2,8 @@ python -m coverage run -m unittest test_receipt.py
 python -m coverage report
 python -m coverage html
 .venv\Scripts\activate.bat
+python manage.py runserver
+python manage.py test
+python manage.py test -v 2
+python manage.py test recipe_catalog.tests.test_routes
+python manage.py test recipe_catalog.tests.test_routes.TestRoutes.test_index_page

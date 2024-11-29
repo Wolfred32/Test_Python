@@ -57,21 +57,27 @@
         <h1>Рецепт</h1>
         <h2>{{title}}</h2>
         <div>Описание рецепта с id = {{recipe_id}}</div>
+        <p><strong>Общий вес:</strong> {{ total_weight }} г</p>
         <div>
             <table class="table">
                 <thead>
                     <tr>
                         <th>Ингредиенты:</th>
+                        <th>В чём:</th>
+                        <th>Вес:</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for ingredient in ingredients %}
                     <tr>
-                        <td>{{ ingredient.name }}</td>
+                        <td>{{ ingredient.ingredient.name }} - {{ ingredient.quantity }}</td>
+                        <td>{{ ingredient.ingredient.get_unit_display }}</td>
+                        <td>({{ ingredient.total_weight }} г)</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+    <a href="{% url 'index' %}">Вернуться к списку рецептов</a>
     </body>
 </html>

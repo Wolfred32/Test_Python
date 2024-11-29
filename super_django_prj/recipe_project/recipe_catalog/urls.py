@@ -1,10 +1,10 @@
 # Файл приложения urls.py
 
 from django.urls import path
-from .views import about, index, recipe_detail
+from . import views
 
 urlpatterns = [
-    path('', index),
-    path('recipe/<int:pk>/', recipe_detail),
-    path('about/', about),
+    path('', views.index, name='index'),
+    path('recipe/<int:pk>/', views.recipe_detail, name='recipe_detail'),
+    path('about/', views.about, name='about'),
 ]

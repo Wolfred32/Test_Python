@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 # Файл приложения views.py
 from django.http import HttpResponse
@@ -16,7 +16,7 @@ def about(request):
 def index(request):
     template_name = 'recipe_catalog/index.html'
 
-    recipes = Recipe.objects.all().order_by('name')
+    recipes = Recipe.objects.prefetch_related('recipeingredient_set__ingredient').order_by('name')
     context = {
         'recipes': recipes,
     }
@@ -28,11 +28,17 @@ def index(request):
 def recipe_detail(request, pk):
     template_name = 'recipe_catalog/recipe.html'
 
-    recipe = Recipe.objects.get(pk=pk)
+    # Получаем рецепт с его ингредиентами
+    recipe = get_object_or_404(Recipe.objects.prefetch_related('recipeingredient_set__ingredient'), pk=pk)
+    # Формируем список ингредиентов с деталями
+    ingredients = recipe.recipeingredient_set.all()
+    # Генерация данных для шаблона
     context = {
         'title': recipe.name,
         'recipe_id': pk,
-        'ingredients': recipe.ingredients.order_by('name')
+        'recipe': recipe,
+        'ingredients': ingredients,
+        'total_weight': recipe.total_weight(),
     }
 
     # title = 'Блинчики с мясом!'
