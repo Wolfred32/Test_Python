@@ -1,0 +1,104 @@
+<!-- recipe_catalog/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Описание страницы">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="icon" href="fav.ico" type="image">
+        <title>Наши Рецепты</title>
+        <style>
+            .table {
+                width: 100%;
+                border: none;
+                margin-bottom: 20px;
+            }
+            .table thead th {
+                font-weight: bold;
+                text-align: left;
+                border: none;
+                padding: 10px 15px;
+                background: #d8d8d8;
+                font-size: 14px;
+            }
+            .table thead tr th:first-child {
+                border-radius: 8px 0 0 8px;
+            }
+            .table thead tr th:last-child {
+                border-radius: 0 8px 8px 0;
+            }
+            .table tbody td {
+                text-align: left;
+                border: none;
+                padding: 10px 15px;
+                font-size: 14px;
+                vertical-align: top;
+            }
+            .table tbody tr:nth-child(even){
+                background: #f3f3f3;
+            }
+            .table tbody tr td:first-child {
+                border-radius: 8px 0 0 8px;
+            }
+            .table tbody tr td:last-child {
+                border-radius: 0 8px 8px 0;
+            }
+            .button {
+                background-color: #000; /* Цвет фона */
+                color: white; /* Белый цвет текста */
+                padding: 10px 20px; /* Внутренние отступы */
+                border: none; /* Без рамки */
+                border-radius: 5px; /* Скругленные углы */
+                text-align: center; /* Центрирование текста */
+                text-decoration: none; /* Без подчеркивания текста */
+                display: inline-block; /* Выравнивание по строке */
+                font-size: 16px; /* Размер шрифта */
+                font-weight: bold; /* Жирный текст */
+                cursor: pointer; /* Курсор в виде руки */
+                transition: background-color 0.3s ease; /* Плавный переход для фона */
+            }
+
+            .button:hover {
+                background-color: #FFF; /* Более темный оттенок зеленого при наведении */
+                color: black;
+            }
+
+            .button:active {
+                background-color: #3e8e41; /* Еще более темный оттенок при нажатии */
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <nav class="w3-bar w3-black">
+                <!-- Меню (навигация) -->
+                <a href="/" class="w3-bar-item w3-button">Главная страница</a>
+                <a href="about/" class="w3-bar-item w3-button">О сайте</a>
+            </nav>
+        </header>
+        <h1>Главная страница</h1>
+        <div>Рецепты:
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Название рецепта</th>
+                        <th>Ссылка на рецепт</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for recipe in recipes %}
+                    <tr>
+                        <td>{{ recipe.name }}</td>
+                        <td>
+                            <a href="http://127.0.0.1:8000/recipe/{{recipe.id}}">
+                                <button class="button">Перейти к рецепту</button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

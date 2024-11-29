@@ -1,0 +1,4 @@
+python -m coverage run -m unittest test_receipt.py
+python -m coverage report
+python -m coverage html
+.venv\Scripts\activate.bat
